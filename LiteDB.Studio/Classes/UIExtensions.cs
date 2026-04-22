@@ -43,9 +43,9 @@ namespace LiteDB.Studio
                         grd.Columns.Add(key, key);
 
                         col = grd.Columns[key];
-                        col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-                        col.ReadOnly = key == "_id";
+                        //col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+						col.Width = 150;
+						col.ReadOnly = key == "_id";
                     }
                 }
 
@@ -58,7 +58,9 @@ namespace LiteDB.Studio
                     var cell = row.Cells[col.Index];
 
                     cell.Style.BackColor = Color.White;
-                    cell.Value = value.IsDocument ? value[key] : value;
+                    var bson = value.IsDocument ? value[key] : value;
+                    cell.Value = bson;
+                    cell.Tag = bson;
 
                     row.ReadOnly = key == "_id";
                 }

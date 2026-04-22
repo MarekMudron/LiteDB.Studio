@@ -815,6 +815,11 @@ namespace LiteDB.Studio
                     e.Value = JsonSerializer.Serialize(value);
                     break;
             }
+
+            if (e.Value is string str && str.Length > 150)
+            {
+                e.Value = str.Substring(0, 150) + "...";
+            }
         }
 
         private void LoadLastDbChecked_Changed(object sender, EventArgs e)
